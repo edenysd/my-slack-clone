@@ -1,6 +1,7 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import ChatPage from "../pages/ChatPage";
 import RegisterPage from "../pages/RegisterPage";
+import Page404 from "../pages/Page404";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "*",
+    element: <Page404 />,
   },
 ]);
 
