@@ -8,6 +8,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link as MuiLink } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -32,12 +33,14 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const objectData = Object.fromEntries(formData.entries());
-    //TODO: create transition to ChatPage
     console.log(objectData);
+    navigate("/app");
   };
 
   return (
