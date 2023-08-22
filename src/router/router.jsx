@@ -2,6 +2,7 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 import ChatPage from "../pages/ChatPage";
 import RegisterPage from "../pages/RegisterPage";
 import Page404 from "../pages/Page404";
+import HelloSection from "../sections/HelloSection/HelloSection";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
         path: "user/:id",
         // TODO: create element
         element: null,
+      },
+      {
+        path: "",
+        // TODO: create element
+        element: <HelloSection />,
       },
     ],
   },
