@@ -22,7 +22,9 @@ const drawerWidth = 240;
 
 const DrawerContent = () => (
   <div>
-    <Toolbar />
+    <Toolbar sx={{ "&": { paddingLeft: "16px" } }}>
+      <h1 className="text-3xl">Slack Clone</h1>
+    </Toolbar>
     <Divider />
     <List>
       {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
