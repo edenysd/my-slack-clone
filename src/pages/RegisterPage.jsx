@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link as MuiLink } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../store/userStore";
+import { useCallback, useState } from "react";
 
 function Copyright(props) {
   return (
@@ -34,14 +36,31 @@ function Copyright(props) {
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const userStore = useUserStore();
+  const [errors, setErrors] = useState({});
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const objectData = Object.fromEntries(formData.entries());
-    console.log(objectData);
-    navigate("/app");
-  };
+  // Used custom check in order to keep it simple
+  const checkForm = useCallback((newData) => {
+    setErrors({
+      firstName: !newData.firstName,
+      lastName: !newData.lastName,
+    });
+
+    return newData.firstName && newData.lastName;
+  }, []);
+
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+
+      const objectData = Object.fromEntries(formData.entries());
+      userStore.setCurrentUser(objectData);
+
+      if (checkForm(objectData)) navigate("/app");
+    },
+    [navigate, userStore, checkForm]
+  );
 
   return (
     <Container component="main" maxWidth="xs">
@@ -64,6 +83,7 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                defaultValue={userStore.currentUser.firstName}
                 autoComplete="given-name"
                 name="firstName"
                 required
@@ -71,21 +91,26 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                error={errors.firstName}
+                helperText={errors.firstName ? "Required field" : ""}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                defaultValue={userStore.currentUser.lastName}
                 required
                 fullWidth
                 id="lastName"
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
+                error={errors.lastName}
+                helperText={errors.lastName ? "Required field" : ""}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
+                defaultValue={userStore.currentUser.email}
                 fullWidth
                 id="email"
                 label="Email Address"
