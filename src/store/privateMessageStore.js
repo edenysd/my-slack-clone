@@ -1,5 +1,10 @@
 import { create } from "zustand";
-import { mockAddPrivateMessage, mockPrivateMessagesData } from "../api/message";
+import {
+  mockAddPrivateMessage,
+  mockEditPrivateMessage,
+  mockPrivateMessagesData,
+  mockRemovePrivateMessage,
+} from "../api/message";
 import { sortMessagesByTimestamp } from "../utils/messageUtils";
 
 const useMessageStore = create((set, get) => ({
@@ -22,6 +27,16 @@ const useMessageStore = create((set, get) => ({
   },
   sendNewPrivateMessage: ({ from, to, text }) => {
     mockAddPrivateMessage({ from, to, text }).then(() => {
+      get().fetchAllPrivateMessages();
+    });
+  },
+  removePrivateMessage: (id) => {
+    mockRemovePrivateMessage(id).then(() => {
+      get().fetchAllPrivateMessages();
+    });
+  },
+  editPrivateMessage: (id, newText) => {
+    mockEditPrivateMessage(id, newText).then(() => {
       get().fetchAllPrivateMessages();
     });
   },
