@@ -1,21 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  IconButton,
-  TextField,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import { Send } from "@mui/icons-material";
 
-const localTheme = createTheme({
-  palette: {
-    mode: "light",
-  },
-});
-
 const ChatTextField = ({ placeholder, submitMessage = () => {} }) => {
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState("");
 
   const handleSendMessage = () => {
     submitMessage(message);
@@ -28,28 +17,26 @@ const ChatTextField = ({ placeholder, submitMessage = () => {} }) => {
   };
 
   return (
-    <ThemeProvider theme={localTheme}>
-      <TextField
-        multiline
-        value={message}
-        onChange={handleChangeMessage}
-        fullWidth
-        placeholder={placeholder}
-        onKeyDown={(e) => {
-          if (e.key == "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            handleSendMessage();
-          }
-        }}
-        InputProps={{
-          endAdornment: (
-            <IconButton onClick={handleSendMessage}>
-              <Send />
-            </IconButton>
-          ),
-        }}
-      />
-    </ThemeProvider>
+    <TextField
+      multiline
+      value={message}
+      onChange={handleChangeMessage}
+      fullWidth
+      placeholder={placeholder}
+      onKeyDown={(e) => {
+        if (e.key == "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          handleSendMessage();
+        }
+      }}
+      InputProps={{
+        endAdornment: (
+          <IconButton onClick={handleSendMessage} color="success">
+            <Send />
+          </IconButton>
+        ),
+      }}
+    />
   );
 };
 
