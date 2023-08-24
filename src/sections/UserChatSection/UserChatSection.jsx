@@ -66,7 +66,7 @@ const UserChatSection = () => {
           submitMessage={sendMessage}
         />
       </div>
-      <div className="overflow-auto h-full px-6 lg:px-8 flex flex-col-reverse">
+      <div className="overflow-auto h-full px-6 lg:px-8 flex flex-col-reverse pt-3">
         {currentPrivateMessages.length ? (
           currentPrivateMessages.map((message) => (
             <ChatMessage
