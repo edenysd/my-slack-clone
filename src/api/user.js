@@ -8,12 +8,12 @@ const fakeUsersData = [
     avatar: "https://i.pravatar.cc/100?u=albert",
   },
   {
-    id: 2,
-    username: "rodolf",
-    firstName: "Rodolfo",
-    lastName: "Perez",
-    email: "rodperez@gmail.com",
-    avatar: "https://i.pravatar.cc/100?u=rodolf60",
+    id: 4,
+    username: "mel99",
+    firstName: "Melissa",
+    lastName: "Gonzalez",
+    email: "mellisa@gmail.com",
+    avatar: "https://i.pravatar.cc/100?u=mel9",
   },
   {
     id: 3,
@@ -24,20 +24,20 @@ const fakeUsersData = [
     avatar: "https://i.pravatar.cc/100?u=liset22",
   },
   {
-    id: 4,
-    username: "mel99",
-    firstName: "Melissa",
-    lastName: "Gonzalez",
-    email: "mellisa@gmail.com",
-    avatar: "https://i.pravatar.cc/100?u=mel9",
-  },
-  {
     id: 5,
     username: "carlitos",
     firstName: "Carlos",
     lastName: "Rodriguez",
     email: "alb@gmail.com",
     avatar: "https://i.pravatar.cc/100?u=carlitos2",
+  },
+  {
+    id: 2,
+    username: "rodolf",
+    firstName: "Rodolfo",
+    lastName: "Perez",
+    email: "rodperez@gmail.com",
+    avatar: "https://i.pravatar.cc/100?u=rodolf60",
   },
 ];
 
