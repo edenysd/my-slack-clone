@@ -29,6 +29,7 @@ import {
 import CreateChannelDialog from "../components/CreateChannelDialog";
 import useChannelStore from "../store/channelStore";
 import useUserStore from "../store/userStore";
+import { getFullName } from "../utils/userUtils";
 
 const drawerWidth = 260;
 
@@ -168,7 +169,7 @@ const DrawerContent = () => {
                       />
                       <ListItemText
                         sx={{ color: "#FFF" }}
-                        primary={user.firstName + " " + user.lastName}
+                        primary={getFullName(user)}
                       />
                     </ListItemButton>
                   </ListItem>
