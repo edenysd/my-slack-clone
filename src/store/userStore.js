@@ -11,11 +11,17 @@ const createUsername = ({ firstName, lastName }) => {
 const useUserStore = create((set, get) => ({
   loadingUsersData: false,
   users: [],
-  currentUser: {},
+  currentUser: null,
   fetchAllUsers: () => {
     set({ loadingUsersData: true });
     mockUsersData().then((usersData) => {
-      set({ users: usersData, loadingUsersData: false });
+      set({
+        users: get().currentUser
+          ? [{ ...get().currentUser }].concat(usersData)
+          : usersData,
+        loadingUsersData: false,
+      });
+      console.log(get().users);
     });
   },
   getUserById: (id) => {
