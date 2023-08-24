@@ -116,16 +116,19 @@ const DrawerContent = () => {
         </IconButton>
       </ListItemButton>
       <Collapse in={openChannel} timeout="auto" unmountOnExit>
-        <List>
+        <List disablePadding>
           {!channelStore.loadingChannelsData
             ? channelStore.channels.map((channel) => (
                 <Link key={channel.id} to={`/app/channel/${channel.id}`}>
                   <ListItem disablePadding>
                     <ListItemButton
                       selected={params.channelId == channel.id}
-                      sx={{ pl: 4, height: "36px" }}
+                      sx={{ pl: 3, height: "36px" }}
                     >
-                      <ListItemIcon sx={{ mr: 3, minWidth: "0px" }}>
+                      <ListItemIcon
+                        className="text-xl justify-center"
+                        sx={{ mr: 1, minWidth: "24px" }}
+                      >
                         #
                       </ListItemIcon>
                       <ListItemText
@@ -149,7 +152,7 @@ const DrawerContent = () => {
         <ListItemText primary="Direct messages" />
       </ListItemButton>
       <Collapse in={openPrivates} timeout="auto" unmountOnExit>
-        <List>
+        <List disablePadding>
           {!userStore.loadingUsersData
             ? userStore.users.map((user) => (
                 <Link key={user.id} to={`/app/private/${user.id}`}>
@@ -159,8 +162,9 @@ const DrawerContent = () => {
                       selected={params.userId == user.id}
                     >
                       <Avatar
-                        sx={{ mr: 2, maxWidth: "30px", maxHeight: "30px" }}
+                        sx={{ mr: 1, maxWidth: "24px", maxHeight: "24px" }}
                         src={user.avatar}
+                        variant="rounded"
                       />
                       <ListItemText
                         sx={{ color: "#FFF" }}
@@ -194,11 +198,11 @@ const ChatLayout = ({ children }) => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box className="h-screen" sx={{ display: "flex" }}>
       <AppBar
         position="fixed"
         sx={{
-          display: { xs: "block", sm: "none" },
+          display: { xs: "block" },
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
@@ -213,7 +217,12 @@ const ChatLayout = ({ children }) => {
           >
             <Menu />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { sm: "none" } }}
+          >
             Slack Clone
           </Typography>
         </Toolbar>
