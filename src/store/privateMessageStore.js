@@ -4,7 +4,7 @@ import {
   mockEditPrivateMessage,
   mockPrivateMessagesData,
   mockRemovePrivateMessage,
-} from "../api/message";
+} from "../api/privateMessage";
 import { sortMessagesByTimestamp } from "../utils/messageUtils";
 
 const useMessageStore = create((set, get) => ({
@@ -22,7 +22,6 @@ const useMessageStore = create((set, get) => ({
         (message.from == to && message.to == from)
       );
     });
-
     return sortMessagesByTimestamp(filteredMessages);
   },
   sendNewPrivateMessage: ({ from, to, text }) => {
