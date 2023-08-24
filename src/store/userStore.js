@@ -21,7 +21,6 @@ const useUserStore = create((set, get) => ({
           : usersData,
         loadingUsersData: false,
       });
-      console.log(get().users);
     });
   },
   getUserById: (id) => {
