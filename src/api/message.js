@@ -75,3 +75,15 @@ export const mockAddPrivateMessage = async ({ from, to, text }) => {
     timestamp: moment(),
   });
 };
+export const mockRemovePrivateMessage = async (id) => {
+  const messageIndex = fakePrivateMessagesData.findIndex(
+    (message) => message.id == id
+  );
+
+  fakePrivateMessagesData.splice(messageIndex, 1);
+};
+
+export const mockEditPrivateMessage = async (id, newText) => {
+  const message = fakePrivateMessagesData.find((message) => message.id == id);
+  message.text = newText;
+};
