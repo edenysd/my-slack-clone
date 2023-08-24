@@ -18,9 +18,7 @@ const useUserStore = create((set, get) => ({
       set({ users: usersData, loadingUsersData: false });
     });
   },
-  getUserById: async (id) => {
-    await get().fetchAllUsers();
-    console.log(get().users, id);
+  getUserById: (id) => {
     return get().users.find((user) => user.id == id);
   },
   setCurrentUser: ({ firstName, lastName, email }) =>
