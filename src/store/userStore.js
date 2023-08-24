@@ -8,7 +8,7 @@ const createUsername = ({ firstName, lastName }) => {
   );
 };
 
-const useUserStore = create((set) => ({
+const useUserStore = create((set, get) => ({
   loadingUsersData: false,
   users: [],
   currentUser: {},
@@ -17,6 +17,11 @@ const useUserStore = create((set) => ({
     mockUsersData().then((usersData) => {
       set({ users: usersData, loadingUsersData: false });
     });
+  },
+  getUserById: async (id) => {
+    await get().fetchAllUsers();
+    console.log(get().users, id);
+    return get().users.find((user) => user.id == id);
   },
   setCurrentUser: ({ firstName, lastName, email }) =>
     set({
