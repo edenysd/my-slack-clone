@@ -33,7 +33,10 @@ const ChatMessage = ({
               {timestamp.calendar()}
             </span>
           </span>
-          <span className="group-hover:opacity-100 opacity-0 transition-all">
+          <span
+            className="group-hover:opacity-100 opacity-0 transition-all"
+            style={{ minHeight: "32px" }}
+          >
             {editable ? (
               <IconButton
                 sx={{ width: "32px", height: "32px" }}
