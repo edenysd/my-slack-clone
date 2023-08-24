@@ -25,7 +25,7 @@ const ChatPage = () => {
   return (
     <ChatLayout>
       <ThemeProvider theme={localTheme}>
-        <Outlet />
+        {userStore.currentUser ? <Outlet /> : null}
       </ThemeProvider>
     </ChatLayout>
   );
