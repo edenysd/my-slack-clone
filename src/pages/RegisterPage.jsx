@@ -83,7 +83,7 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                defaultValue={userStore.currentUser.firstName}
+                defaultValue={userStore.currentUser?.firstName}
                 autoComplete="given-name"
                 name="firstName"
                 required
@@ -97,7 +97,7 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                defaultValue={userStore.currentUser.lastName}
+                defaultValue={userStore.currentUser?.lastName}
                 required
                 fullWidth
                 id="lastName"
@@ -110,7 +110,7 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                defaultValue={userStore.currentUser.email}
+                defaultValue={userStore.currentUser?.email}
                 fullWidth
                 id="email"
                 label="Email Address"

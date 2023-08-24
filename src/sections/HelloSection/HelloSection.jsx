@@ -4,6 +4,8 @@ import useUserStore from "../../store/userStore";
 const HelloSection = () => {
   const currentUser = useUserStore((state) => state.currentUser);
 
+  if (!currentUser) return null;
+
   return (
     <main className="grid w-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
       <div className="text-center flex flex-col items-center">
