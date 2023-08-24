@@ -16,11 +16,9 @@ const defaultTheme = createTheme({
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={defaultTheme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={defaultTheme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
 }
 
