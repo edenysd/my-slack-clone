@@ -14,18 +14,17 @@ const router = createBrowserRouter([
     element: <ChatPage />,
     children: [
       {
-        path: "channel/:id",
+        path: "channel/:channelId",
         // TODO: create element
         element: null,
       },
       {
-        path: "user/:id",
+        path: "private/:userId",
         // TODO: create element
         element: null,
       },
       {
         path: "",
-        // TODO: create element
         element: <HelloSection />,
       },
     ],

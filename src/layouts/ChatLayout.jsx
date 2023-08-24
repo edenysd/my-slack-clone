@@ -1,6 +1,9 @@
+import PropTypes from "prop-types";
 import {
   AppBar,
+  Avatar,
   Box,
+  Collapse,
   Divider,
   Drawer,
   IconButton,
@@ -12,66 +15,179 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React from "react";
-import MailIcon from "@mui/icons-material/Mail";
-import InboxIcon from "@mui/icons-material/Inbox";
-import MenuIcon from "@mui/icons-material/Menu";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+import { useCallback, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import {
+  Add,
+  ExpandLess,
+  ExpandMore,
+  Home,
+  KeyboardReturn,
+  Menu,
+} from "@mui/icons-material";
 
-const drawerWidth = 240;
+import CreateChannelDialog from "../components/CreateChannelDialog";
+import useChannelStore from "../store/channelStore";
+import useUserStore from "../store/userStore";
 
-const DrawerContent = () => (
-  <div>
-    <Toolbar
-      className="flex justify-between"
-      sx={{ "&": { paddingLeft: "16px", paddingRight: "16px" } }}
-    >
-      <h1 className="text-2xl">Slack Clone</h1>
-    </Toolbar>
-    <Divider />
-    <List>
-      {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-        <ListItem key={text} disablePadding>
+const drawerWidth = 260;
+
+const AdministrationListElements = () => {
+  return (
+    <>
+      <Link to={"/app"}>
+        <ListItem disablePadding>
           <ListItemButton>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            <ListItemIcon sx={{ mr: 1, minWidth: "24px" }}>
+              <Home sx={{ color: "#a0a4ff" }} />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={"Home"} sx={{ color: "#a0a4ff" }} />
           </ListItemButton>
         </ListItem>
-      ))}
-    </List>
-    <Divider />
-    <List>
-      {["All mail", "Trash", "Spam"].map((text, index) => (
-        <ListItem key={text} disablePadding>
+      </Link>
+      <Link to="/">
+        <ListItem disablePadding>
           <ListItemButton>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            <ListItemIcon sx={{ mr: 1, minWidth: "24px" }}>
+              <KeyboardReturn color="error" />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText
+              primary={"Logout"}
+              sx={{ "&": { color: "#f44336" } }}
+            />
           </ListItemButton>
         </ListItem>
-      ))}
-    </List>
-    <Divider />
-    <Link className="mt-3" to="/">
-      <ListItem disablePadding>
-        <ListItemButton>
-          <ListItemIcon>
-            <KeyboardReturnIcon color="error" />
-          </ListItemIcon>
-          <ListItemText primary={"Logout"} sx={{ "&": { color: "#f44336" } }} />
-        </ListItemButton>
-      </ListItem>
-    </Link>
-  </div>
-);
+      </Link>
+    </>
+  );
+};
+
+const DrawerContent = () => {
+  const [openChannel, setOpenChannel] = useState(true);
+  const [openPrivates, setOpenPrivates] = useState(true);
+  const [openCreateChannelDialog, setOpenCreateChannelDialog] = useState(false);
+
+  const channelStore = useChannelStore();
+  const fetchAllChannels = useChannelStore((state) => state.fetchAllChannels);
+  const userStore = useUserStore();
+  const fetchAllUsers = useUserStore((state) => state.fetchAllUsers);
+
+  const params = useParams();
+
+  const handleClickChannels = useCallback(() => {
+    setOpenChannel(!openChannel);
+  }, [openChannel]);
+
+  const handleClickPrivates = useCallback(() => {
+    setOpenPrivates(!openPrivates);
+  }, [openPrivates]);
+
+  const handleOpenAddChannelDialog = useCallback((e) => {
+    setOpenCreateChannelDialog(true);
+    e.stopPropagation();
+  }, []);
+
+  useEffect(() => {
+    fetchAllChannels();
+    fetchAllUsers();
+  }, [fetchAllChannels, fetchAllUsers]);
+
+  return (
+    <div>
+      <Toolbar
+        className="flex justify-between"
+        sx={{ "&": { paddingLeft: "20px", paddingRight: "16px" } }}
+      >
+        <h1 className="text-2xl">Slack Clone</h1>
+      </Toolbar>
+
+      <Divider />
+
+      <ListItemButton onClick={handleClickChannels}>
+        <ListItemIcon sx={{ mr: 1, minWidth: "24px" }}>
+          {openChannel ? <ExpandLess /> : <ExpandMore />}
+        </ListItemIcon>
+        <ListItemText primary="Channels" />
+        <IconButton
+          onClick={handleOpenAddChannelDialog}
+          sx={{ height: "30px", width: "30px" }}
+        >
+          <Add />
+        </IconButton>
+      </ListItemButton>
+      <Collapse in={openChannel} timeout="auto" unmountOnExit>
+        <List>
+          {!channelStore.loadingChannelsData
+            ? channelStore.channels.map((channel) => (
+                <Link key={channel.id} to={`/app/channel/${channel.id}`}>
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      selected={params.channelId == channel.id}
+                      sx={{ pl: 4, height: "36px" }}
+                    >
+                      <ListItemIcon sx={{ mr: 3, minWidth: "0px" }}>
+                        #
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={channel.name}
+                        sx={{ color: "#FFF" }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                </Link>
+              ))
+            : null}
+        </List>
+      </Collapse>
+
+      <Divider />
+
+      <ListItemButton onClick={handleClickPrivates}>
+        <ListItemIcon sx={{ mr: 1, minWidth: "24px" }}>
+          {openPrivates ? <ExpandLess /> : <ExpandMore />}
+        </ListItemIcon>
+        <ListItemText primary="Direct messages" />
+      </ListItemButton>
+      <Collapse in={openPrivates} timeout="auto" unmountOnExit>
+        <List>
+          {!userStore.loadingUsersData
+            ? userStore.users.map((user) => (
+                <Link key={user.id} to={`/app/private/${user.id}`}>
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      sx={{ pl: 3, height: "36px" }}
+                      selected={params.userId == user.id}
+                    >
+                      <Avatar
+                        sx={{ mr: 2, maxWidth: "30px", maxHeight: "30px" }}
+                        src={user.avatar}
+                      />
+                      <ListItemText
+                        sx={{ color: "#FFF" }}
+                        primary={user.firstName + " " + user.lastName}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                </Link>
+              ))
+            : null}
+        </List>
+      </Collapse>
+
+      <Divider />
+
+      <AdministrationListElements />
+
+      <CreateChannelDialog
+        open={openCreateChannelDialog}
+        handleClose={() => setOpenCreateChannelDialog(false)}
+      />
+    </div>
+  );
+};
 
 const ChatLayout = ({ children }) => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -95,7 +211,7 @@ const ChatLayout = ({ children }) => {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             Slack Clone
