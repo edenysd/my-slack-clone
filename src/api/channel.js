@@ -21,7 +21,7 @@ const fakeChannelsData = [
   },
 ];
 
-export const mockChannelsData = async () => fakeChannelsData;
+export const mockChannelsData = async () => [...fakeChannelsData];
 
 export const mockAddChannel = async (name) => {
   const maxId = fakeChannelsData.reduce(
@@ -29,5 +29,4 @@ export const mockAddChannel = async (name) => {
     0
   );
   fakeChannelsData.push({ id: maxId + 1, name });
-  console.log(fakeChannelsData);
 };

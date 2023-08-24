@@ -41,4 +41,4 @@ const fakeUsersData = [
   },
 ];
 
-export const mockUsersData = async () => fakeUsersData;
+export const mockUsersData = async () => [...fakeUsersData];

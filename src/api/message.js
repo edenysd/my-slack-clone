@@ -6,39 +6,41 @@ const fakeChannelsMessagesData = [
     from: 1,
     to: 2,
     text: "Hiii!!! Good morning all!!!",
-    timestamp: moment().subtract(6, "days").calendar(),
+    timestamp: moment().subtract(6, "days"),
   },
   {
     id: 0,
     from: 1,
     to: 2,
     text: "Hi friends!",
-    timestamp: moment().subtract(6, "days").calendar(),
+    timestamp: moment().subtract(6, "days"),
   },
   {
     id: 0,
     from: 1,
     to: 2,
     text: "Hiii!!! Good morning all!!!",
-    timestamp: moment().subtract(6, "days").calendar(),
+    timestamp: moment().subtract(6, "days"),
   },
   {
     id: 0,
     from: 1,
     to: 2,
     text: "Hiii!!! Good morning all!!!",
-    timestamp: moment().subtract(6, "days").calendar(),
+    timestamp: moment().subtract(6, "days"),
   },
   {
     id: 0,
     from: 1,
     to: 2,
     text: "Hiii!!! Good morning all!!!",
-    timestamp: moment().subtract(6, "days").calendar(),
+    timestamp: moment().subtract(6, "days"),
   },
 ];
 
-export const mockChannelsMessagesData = async () => fakeChannelsMessagesData;
+export const mockChannelsMessagesData = async () => [
+  ...fakeChannelsMessagesData,
+];
 
 export const mockAddChannelMessage = async ({ from, to, text, timestamp }) => {
   const maxId = fakeChannelsMessagesData.reduce(
@@ -46,7 +48,6 @@ export const mockAddChannelMessage = async ({ from, to, text, timestamp }) => {
     0
   );
   fakeChannelsMessagesData.push({ id: maxId + 1, from, to, text, timestamp });
-  console.log(fakeChannelsMessagesData);
 };
 
 const fakePrivateMessagesData = [
@@ -55,11 +56,11 @@ const fakePrivateMessagesData = [
     from: 1,
     to: 0,
     text: "Hiii!!! Good morning my friend!!!",
-    timestamp: moment().subtract(6, "days").calendar(),
+    timestamp: moment().subtract(6, "days"),
   },
 ];
 
-export const mockPrivateMessagesData = async () => fakePrivateMessagesData;
+export const mockPrivateMessagesData = async () => [...fakePrivateMessagesData];
 
 export const mockAddPrivateMessage = async ({ from, to, text }) => {
   const maxId = fakePrivateMessagesData.reduce(
@@ -71,7 +72,6 @@ export const mockAddPrivateMessage = async ({ from, to, text }) => {
     from,
     to,
     text,
-    timestamp: moment().calendar(),
+    timestamp: moment(),
   });
-  console.log(fakePrivateMessagesData);
 };
