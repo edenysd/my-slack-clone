@@ -31,7 +31,7 @@ import useChannelStore from "../store/channelStore";
 import useUserStore from "../store/userStore";
 import { getFullName } from "../utils/userUtils";
 
-const drawerWidth = 260;
+const drawerWidth = 280;
 
 const AdministrationListElements = () => {
   return (
@@ -94,7 +94,7 @@ const DrawerContent = () => {
   }, [fetchAllChannels, fetchAllUsers]);
 
   return (
-    <div>
+    <div className="overflow-y-auto overflow-x-hidden">
       <Toolbar
         className="flex justify-between"
         sx={{ "&": { paddingLeft: "20px", paddingRight: "16px" } }}
