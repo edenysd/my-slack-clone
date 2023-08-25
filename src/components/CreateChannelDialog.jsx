@@ -19,7 +19,7 @@ const CreateChannelDialog = ({ open, handleClose }) => {
 
   const handleChangeChannelName = useCallback(
     (e) => {
-      if (e.target.value.length > 30) return;
+      if (e.target.value.length > 20) return;
 
       setNewChannelName(e.target.value);
       if (e.target.value && error) setError(false);
