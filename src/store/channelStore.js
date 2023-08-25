@@ -13,6 +13,9 @@ const useChannelStore = create((set, get) => ({
   createChannel: (channel) => {
     mockAddChannel(channel).then(() => get().fetchAllChannels());
   },
+  getChannelById: (id) => {
+    return get().channels.find((channel) => channel.id == id);
+  },
 }));
 
 export default useChannelStore;
