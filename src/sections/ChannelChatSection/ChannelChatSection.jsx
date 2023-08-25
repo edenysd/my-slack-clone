@@ -46,6 +46,7 @@ const ChannelChatSection = () => {
       await channelMessageStore.fetchAllChannelMessages();
     };
     getData();
+    // Disabled eslint because we want to subscribe this hook to custom variables
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser.id, targetChannel.id]);
 
@@ -55,6 +56,7 @@ const ChannelChatSection = () => {
         to: targetChannel.id,
       })
     );
+    // Disabled eslint because we want to subscribe this hook to custom variables
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [channelMessages, currentUser.id, targetChannel.id]);
 
@@ -63,7 +65,7 @@ const ChannelChatSection = () => {
       <div className=" px-6 lg:px-8 ">
         <ChatTextField
           className="px-6 lg:px-8"
-          placeholder={`Send a message to ${targetChannel?.username}`}
+          placeholder={`Send a message to #${targetChannel?.name}`}
           submitMessage={sendMessage}
         />
       </div>

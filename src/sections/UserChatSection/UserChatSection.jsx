@@ -44,6 +44,7 @@ const UserChatSection = () => {
       await privateMessageStore.fetchAllPrivateMessages();
     };
     getData();
+    // Disabled eslint because we want to subscribe this hook to custom variables
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser.id, targetUser.id]);
 
@@ -54,6 +55,7 @@ const UserChatSection = () => {
         to: targetUser.id,
       })
     );
+    // Disabled eslint because we want to subscribe this hook to custom variables
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [privateMessages, currentUser.id, targetUser.id]);
 
