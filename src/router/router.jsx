@@ -4,6 +4,7 @@ import RegisterPage from "../pages/RegisterPage";
 import Page404 from "../pages/Page404";
 import HelloSection from "../sections/HelloSection/HelloSection";
 import UserChatSection from "../sections/UserChatSection/UserChatSection";
+import ChannelChatSection from "../sections/ChannelChatSection/ChannelChatSection";
 
 const router = createBrowserRouter([
   {
@@ -16,8 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "channel/:channelId",
-        // TODO: create element
-        element: null,
+        element: <ChannelChatSection />,
       },
       {
         path: "private/:userId",

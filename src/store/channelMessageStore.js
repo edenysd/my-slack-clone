@@ -7,15 +7,15 @@ import {
 } from "../api/channelMessage";
 import { sortMessagesByTimestamp } from "../utils/messageUtils";
 
-const useMessageStore = create((set, get) => ({
+const useChannelMessageStore = create((set, get) => ({
   loadingChannelMessages: false,
   channelMessages: [],
-  fetchAllchannelMessages: async () => {
+  fetchAllChannelMessages: async () => {
     set({ loadingChannelMessages: true });
     const messages = await mockChannelMessagesData();
     set({ channelMessages: messages, loadingChannelMessages: false });
   },
-  filterAllMessagesChannelConversation: ({ to }) => {
+  filterAllMessagesFromChannelConversation: ({ to }) => {
     const filteredMessages = get().channelMessages.filter((message) => {
       return message.to == to;
     });
@@ -23,19 +23,19 @@ const useMessageStore = create((set, get) => ({
   },
   sendNewChannelMessage: ({ from, to, text }) => {
     mockAddChannelMessage({ from, to, text }).then(() => {
-      get().fetchAllchannelMessages();
+      get().fetchAllChannelMessages();
     });
   },
   removeChannelMessage: (id) => {
     mockRemoveChannelMessage(id).then(() => {
-      get().fetchAllchannelMessages();
+      get().fetchAllChannelMessages();
     });
   },
   editChannelMessage: (id, newText) => {
     mockEditChannelMessage(id, newText).then(() => {
-      get().fetchAllchannelMessages();
+      get().fetchAllChannelMessages();
     });
   },
 }));
 
-export default useMessageStore;
+export default useChannelMessageStore;
