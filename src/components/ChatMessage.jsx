@@ -19,7 +19,6 @@ const ChatMessage = ({
   return !isEditMode ? (
     <Box
       className={"flex group items-start w-full hover:bg-gray-200 " + className}
-      sx={{ minHeight: "90px" }}
     >
       <Avatar
         className="mt-2"
@@ -27,7 +26,10 @@ const ChatMessage = ({
         src={user.avatar}
         sx={{ width: "54px", height: "54px" }}
       />
-      <div className="flex flex-col ml-3 w-full">
+      <div
+        className="flex flex-col ml-3 w-full overflow-auto"
+        style={{ minHeight: "90px" }}
+      >
         <div className="flex items-center justify-between">
           <span>
             <span className="font-bold text-base mr-2">
@@ -59,12 +61,11 @@ const ChatMessage = ({
             ) : null}
           </span>
         </div>
-        <p
-          className="text-gray-700 whitespace-break-spaces"
-          style={{ overflowWrap: "break-word" }}
-        >
-          {text}
-        </p>
+        <div className="pr-2">
+          <p className="text-gray-700 whitespace-break-spaces break-words">
+            {text}
+          </p>
+        </div>
       </div>
     </Box>
   ) : (

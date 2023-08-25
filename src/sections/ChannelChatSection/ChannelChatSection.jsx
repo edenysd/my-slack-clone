@@ -59,7 +59,7 @@ const ChannelChatSection = () => {
   }, [channelMessages, currentUser.id, targetChannel.id]);
 
   return (
-    <main className="flex flex-col-reverse text-black w-full min-h-full bg-white py-16 sm:py-16">
+    <main className="flex flex-col-reverse text-black w-full overflow-auto min-h-full bg-white py-16 sm:py-16">
       <div className=" px-6 lg:px-8 ">
         <ChatTextField
           className="px-6 lg:px-8"
@@ -67,7 +67,7 @@ const ChannelChatSection = () => {
           submitMessage={sendMessage}
         />
       </div>
-      <div className="overflow-auto h-full flex flex-col-reverse pt-3">
+      <div className="overflow-y-auto h-full flex flex-col-reverse pt-3">
         {currentChannelMessages.length ? (
           currentChannelMessages.map((message) => (
             <ChatMessage

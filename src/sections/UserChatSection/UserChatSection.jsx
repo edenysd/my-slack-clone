@@ -58,7 +58,7 @@ const UserChatSection = () => {
   }, [privateMessages, currentUser.id, targetUser.id]);
 
   return (
-    <main className="flex flex-col-reverse text-black w-full min-h-full bg-white py-16 sm:py-16">
+    <main className="flex flex-col-reverse text-black w-full overflow-auto min-h-full bg-white py-16 sm:py-16">
       <div className=" px-6 lg:px-8 ">
         <ChatTextField
           className="px-6 lg:px-8"
@@ -66,10 +66,11 @@ const UserChatSection = () => {
           submitMessage={sendMessage}
         />
       </div>
-      <div className="overflow-auto h-full px-6 lg:px-8 flex flex-col-reverse pt-3">
+      <div className="overflow-y-auto h-full flex flex-col-reverse pt-3">
         {currentPrivateMessages.length ? (
           currentPrivateMessages.map((message) => (
             <ChatMessage
+              className={"px-6 lg:px-8"}
               key={message.id}
               user={getUserById(message.from)}
               timestamp={message.timestamp}

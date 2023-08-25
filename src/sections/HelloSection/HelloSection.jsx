@@ -7,12 +7,15 @@ const HelloSection = () => {
   if (!currentUser) return null;
 
   return (
-    <main className="grid w-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-      <div className="text-center flex flex-col items-center">
+    <main className="flex flex-col justify-center overflow-auto w-full items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+      <div
+        className="text-center overflow-auto flex flex-col items-center"
+        style={{ maxWidth: "100%" }}
+      >
         <p className="text-xl font-semibold text-fuchsia-700 sm:text-3xl">
           Hi 👋
         </p>
-        <h1 className="mt-1 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        <h1 className="mt-1 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl break-all">
           <span>{currentUser.firstName}</span>{" "}
           <span className="text-gray-600">{currentUser.lastName}</span>
         </h1>
