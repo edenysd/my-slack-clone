@@ -13,10 +13,14 @@ const ChatMessage = ({
   editable,
   onEdit,
   onRemove,
+  className,
 }) => {
   const [isEditMode, setEditMode] = useState(false);
   return !isEditMode ? (
-    <Box className="flex group items-start w-full" sx={{ minHeight: "90px" }}>
+    <Box
+      className={"flex group items-start w-full hover:bg-gray-200 " + className}
+      sx={{ minHeight: "90px" }}
+    >
       <Avatar
         className="mt-2"
         variant="rounded"
@@ -80,6 +84,7 @@ ChatMessage.propTypes = {
   onRemove: PropTypes.func,
   removable: PropTypes.bool,
   editable: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default ChatMessage;
