@@ -1,3 +1,5 @@
+import { formatNewChannelName } from "../utils/channelUtils";
+
 const fakeChannelsData = [
   {
     id: 0,
@@ -13,7 +15,7 @@ const fakeChannelsData = [
   },
   {
     id: 1,
-    name: "frank party",
+    name: "frank-party",
   },
   {
     id: 4,
@@ -28,5 +30,5 @@ export const mockAddChannel = async (name) => {
     (curMaxId, curChannel) => Math.max(curMaxId, curChannel.id),
     0
   );
-  fakeChannelsData.push({ id: maxId + 1, name });
+  fakeChannelsData.push({ id: maxId + 1, name: formatNewChannelName(name) });
 };
