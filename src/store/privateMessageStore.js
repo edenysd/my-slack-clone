@@ -7,7 +7,7 @@ import {
 } from "../api/privateMessage";
 import { sortMessagesByTimestamp } from "../utils/messageUtils";
 
-const useMessageStore = create((set, get) => ({
+const usePrivateMessageStore = create((set, get) => ({
   loadingPrivateMessages: false,
   privateMessages: [],
   fetchAllPrivateMessages: async () => {
@@ -41,4 +41,4 @@ const useMessageStore = create((set, get) => ({
   },
 }));
 
-export default useMessageStore;
+export default usePrivateMessageStore;
