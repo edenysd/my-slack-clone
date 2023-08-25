@@ -25,9 +25,10 @@ const usePrivateMessageStore = create((set, get) => ({
     return sortMessagesByTimestamp(filteredMessages);
   },
   sendNewPrivateMessage: ({ from, to, text }) => {
-    mockAddPrivateMessage({ from, to, text }).then(() => {
-      get().fetchAllPrivateMessages();
-    });
+    if (text)
+      mockAddPrivateMessage({ from, to, text }).then(() => {
+        get().fetchAllPrivateMessages();
+      });
   },
   removePrivateMessage: (id) => {
     mockRemovePrivateMessage(id).then(() => {
@@ -35,9 +36,10 @@ const usePrivateMessageStore = create((set, get) => ({
     });
   },
   editPrivateMessage: (id, newText) => {
-    mockEditPrivateMessage(id, newText).then(() => {
-      get().fetchAllPrivateMessages();
-    });
+    if (newText)
+      mockEditPrivateMessage(id, newText).then(() => {
+        get().fetchAllPrivateMessages();
+      });
   },
 }));
 

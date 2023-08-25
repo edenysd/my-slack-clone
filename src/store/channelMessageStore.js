@@ -22,9 +22,10 @@ const useChannelMessageStore = create((set, get) => ({
     return sortMessagesByTimestamp(filteredMessages);
   },
   sendNewChannelMessage: ({ from, to, text }) => {
-    mockAddChannelMessage({ from, to, text }).then(() => {
-      get().fetchAllChannelMessages();
-    });
+    if (text)
+      mockAddChannelMessage({ from, to, text }).then(() => {
+        get().fetchAllChannelMessages();
+      });
   },
   removeChannelMessage: (id) => {
     mockRemoveChannelMessage(id).then(() => {
@@ -32,9 +33,10 @@ const useChannelMessageStore = create((set, get) => ({
     });
   },
   editChannelMessage: (id, newText) => {
-    mockEditChannelMessage(id, newText).then(() => {
-      get().fetchAllChannelMessages();
-    });
+    if (newText)
+      mockEditChannelMessage(id, newText).then(() => {
+        get().fetchAllChannelMessages();
+      });
   },
 }));
 

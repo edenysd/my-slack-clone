@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { IconButton, TextField } from "@mui/material";
 import { Send } from "@mui/icons-material";
+import { useLocation } from "react-router-dom";
 
 const ChatTextField = ({ placeholder, submitMessage = () => {} }) => {
   const [message, setMessage] = useState("");
+  const location = useLocation();
 
   const handleSendMessage = () => {
     submitMessage(message);
@@ -15,6 +17,10 @@ const ChatTextField = ({ placeholder, submitMessage = () => {} }) => {
     e.preventDefault();
     setMessage(e.target.value);
   };
+
+  useEffect(() => {
+    setMessage("");
+  }, [location.pathname]);
 
   return (
     <TextField
