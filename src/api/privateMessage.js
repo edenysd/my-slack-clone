@@ -124,6 +124,7 @@ export const mockAddPrivateMessage = async ({ from, to, text }) => {
     timestamp: moment(),
   });
 };
+
 export const mockRemovePrivateMessage = async (id) => {
   const messageIndex = fakePrivateMessagesData.findIndex(
     (message) => message.id == id

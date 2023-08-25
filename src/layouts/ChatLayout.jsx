@@ -24,6 +24,7 @@ import {
   Home,
   KeyboardReturn,
   Menu,
+  Remove,
 } from "@mui/icons-material";
 
 import CreateChannelDialog from "../components/CreateChannelDialog";
@@ -121,7 +122,7 @@ const DrawerContent = () => {
           {!channelStore.loadingChannelsData
             ? channelStore.channels.map((channel) => (
                 <Link key={channel.id} to={`/app/channel/${channel.id}`}>
-                  <ListItem disablePadding>
+                  <ListItem className="group" disablePadding>
                     <ListItemButton
                       selected={params.channelId == channel.id}
                       sx={{ pl: 3, height: "36px" }}
@@ -136,6 +137,16 @@ const DrawerContent = () => {
                         primary={channel.name}
                         sx={{ color: "#FFF" }}
                       />
+                      <IconButton
+                        className="opacity-0 group-hover:opacity-100"
+                        sx={{ width: "30px", height: "30px" }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          channelStore.removeChannelById(channel.id);
+                        }}
+                      >
+                        <Remove />
+                      </IconButton>
                     </ListItemButton>
                   </ListItem>
                 </Link>

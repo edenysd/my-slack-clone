@@ -1,5 +1,9 @@
 import { create } from "zustand";
-import { mockAddChannel, mockChannelsData } from "../api/channel";
+import {
+  mockAddChannel,
+  mockChannelsData,
+  mockRemoveChannel,
+} from "../api/channel";
 
 const useChannelStore = create((set, get) => ({
   loadingChannelsData: false,
@@ -15,6 +19,11 @@ const useChannelStore = create((set, get) => ({
   },
   getChannelById: (id) => {
     return get().channels.find((channel) => channel.id == id);
+  },
+  removeChannelById: (id) => {
+    mockRemoveChannel(id).then(() => {
+      get().fetchAllChannels();
+    });
   },
 }));
 

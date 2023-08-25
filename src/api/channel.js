@@ -32,3 +32,11 @@ export const mockAddChannel = async (name) => {
   );
   fakeChannelsData.push({ id: maxId + 1, name: formatNewChannelName(name) });
 };
+
+export const mockRemoveChannel = async (id) => {
+  const messageIndex = fakeChannelsData.findIndex(
+    (message) => message.id == id
+  );
+
+  fakeChannelsData.splice(messageIndex, 1);
+};
